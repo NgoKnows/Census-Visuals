@@ -14,9 +14,8 @@ var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorad
 angular.module('censusVisuals', [
 ])
     .controller('ProjectController', function ($scope) {
-        $scope.baselink = "http://api.census.gov/data/2000/sf1?key=1c449fba433e3ded25970e0c260091f7af88a0f8"
+        $scope.baselink = "http://api.census.gov/data/2000/sf1?key="
     });
-console.log('it works');
 
 //get men, women population 1990
 var gender1990;
@@ -28,23 +27,24 @@ $.getJSON(baselink1990 + "&get=P0050001,P0050002&for=state:*", function (data) {
 $.getJSON(baselink2000 + "&get=P012002,P012026&for=state:*", function (data) {
     gender2000 = data;
 });
-$.getJSON(baselink2010 + "&get=P0120002,P012A026&for=state:*", function (data) {
+$.getJSON(baselink2010 + "&get=P0120002,P0120001&for=state:*", function (data) {
     gender2010 = data;
 });
-var stateGender = {};
-var totals = [0,0];
-setTimeout(function () {
-    for (var i = 1; i < 52; i++) {
-        var gender = [];
-        var males = parseInt(gender1990[i][0]);
-        var females = parseInt(gender1990[i][1]);
-        gender[0] = males;
-        gender[1] = females;
-        totals[0] += males;
-        totals[1] += females;
-        stateGender[states[i]] = gender;
-    }
-    console.log(stateGender);
-    console.log(totals);
-}, 1000);
 
+var stateGender = {};
+var totals = [0, 0];
+var getGenders = function () {
+    setTimeout(function (data) {
+        for (var i = 1; i < 52; i++) {
+            var gender = [];
+            var males = parseInt(gender2010[i][0]);
+            var females = parseInt(gender2010[i][1]) - males;
+            gender[0] = males;
+            gender[1] = females;
+            totals[0] += males;
+            totals[1] += females;
+            stateGender[states[i - 1]] = gender;
+        }
+    }, 1000);
+}
+var gender
