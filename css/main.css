@@ -4,3 +4,22 @@
 .background{
     height: 100vh;
 }
+.btn-group{
+    padding: 0.25em;
+}
+#graph{
+    padding-left: 2em;
+/*    background-color: #A2DED0;*/
+    padding-top: 2em;
+}
+section{
+    margin-top: 3em;
+}
+svg{
+    font-family: 'Lato';
+    font-weight: 800;
+}
+.scroll{
+    overflow-y: scroll;
+    max-height: 15em;
+}
