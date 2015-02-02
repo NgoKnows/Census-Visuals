@@ -1,14 +1,14 @@
 var formatData = function (data, state) {
     formattedData = [];
     for (var i = 0; i < data.length; i++) {
-        console.log(data);
         formattedData.push(data[i][state]);
     }
     return formattedData;
 }
 var createGraph = function (unformattedData, state) {
+    d3.select("svg")
+        .remove();
     var data = formatData(unformattedData, state);
-    console.log(data);
     var margin = {
         top: 50,
         right: 20,
@@ -52,7 +52,11 @@ var createGraph = function (unformattedData, state) {
             }
         })
     ]);
-
+    if (y.domain()[1] < 1000000) {
+        y.domain([0, 5000642]);
+    } else if (y.domain()[1] < 156964212) {
+        y.domain([0, 15096421]);
+    }
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
@@ -66,7 +70,7 @@ var createGraph = function (unformattedData, state) {
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("Here");
+        .text("Population");
 
     var years = svg.selectAll(".state")
         .data(data)
@@ -115,4 +119,9 @@ var createGraph = function (unformattedData, state) {
         .text(function (d) {
             return d;
         });
+    return years;
 };
+
+var remove = function(){
+    d3.select("svg").selectAll("rect");
+}
