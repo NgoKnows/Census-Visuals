@@ -1,8 +1,5 @@
 "use strict"
 
-var baselink1990 = "http://api.census.gov/data/1990/sf1?key=1c449fba433e3ded25970e0c260091f7af88a0f8"
-var baselink2000 = "http://api.census.gov/data/2000/sf1?key=1c449fba433e3ded25970e0c260091f7af88a0f8"
-var baselink2010 = "http://api.census.gov/data/2010/sf1?key=1c449fba433e3ded25970e0c260091f7af88a0f8"
 var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
 "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
 "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
