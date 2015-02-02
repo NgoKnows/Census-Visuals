@@ -11,20 +11,6 @@ var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorad
 "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
 "West Virginia", "Wisconsin", "Wyoming", "United States"];
 
-angular.module('censusVisuals', [
-])
-    .controller('VisualsController', function ($scope) {
-        $scope.states = states;
-        $scope.button1 = "All States"
-        $scope.stateSwitch = function(state){
-            createGraph(genderDictList, state);
-        }
-        $scope.changeButtonText = function(button, state){
-            $scope[button] = state;
-        }
-    });
-
-//get men, women population 1990, 2000, 2010
 var genderDict1990;
 var genderDict2000;
 var genderDict2010;
@@ -68,9 +54,32 @@ $.getJSON(baselink2010 + "&get=PCT0070002,PCT0070003,PCT0070004,PCT0070005,PCT00
     asianDict2010 = getAsianDict(data, 2010);
 });
 
+var asianDictList;
+var genderDictList;
+var raceDictList;
 setTimeout(function () {
-    var asianDictList = [asianDict1990, asianDict2000, asianDict2010];
-    var genderDictList = [genderDict1990, genderDict2000, genderDict2010];
-    var raceDictList = [raceDict1990, raceDict2000, raceDict2010];
+    asianDictList = [asianDict1990, asianDict2000, asianDict2010];
+    genderDictList = [genderDict1990, genderDict2000, genderDict2010];
+    raceDictList = [raceDict1990, raceDict2000, raceDict2010];
     createGraph(genderDictList, "total");
 }, 300);
+
+
+angular.module('censusVisuals', [
+])
+    .controller('VisualsController', function ($scope) {
+        $scope.states = states;
+        $scope.button1 = "All States"
+        $scope.stateSwitch = function (state) {
+            createGraph(genderDictList, state);
+        }
+        $scope.changeButtonText = function (button, state) {
+            $scope[button] = state;
+        }
+        $scope.switchGenderGraph = function (button, state) {
+            $scope.changeButtonText(button, state);
+            $scope.stateSwitch(state);
+        }
+    });
+
+//get men, women population 1990, 2000, 2010
